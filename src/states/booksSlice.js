@@ -1,8 +1,9 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, current } from '@reduxjs/toolkit';
 
 const initialState = {
   books: [],
   totalItems: 0,
+  currentBook: {},
 };
 
 export const booksSlice = createSlice({
@@ -18,9 +19,13 @@ export const booksSlice = createSlice({
     addToCurrentBooksList: (state, action) => {
       state.books = [...state.books, ...action.payload];
     },
+    getCurrentBook: (state) => {
+      console.log(state.currentBook);
+      return state.currentBook;
+    },
   },
 });
 
-export const { updateBooksList, updateTotalItems, addToCurrentBooksList } = booksSlice.actions;
+export const { updateBooksList, updateTotalItems, addToCurrentBooksList, getCurrentBook } = booksSlice.actions;
 
 export default booksSlice.reducer;

@@ -1,25 +1,27 @@
 import React from 'react';
 import NoCover from '../assets/images/no-cover.jpg';
+import { useNavigate } from 'react-router-dom';
 
 export const BookItem = (book) => {
-  let { title, authors, categories } = book.book;
+  let { title, authors, categories } = book.book.volumeInfo;
   let imageLink = NoCover;
+  const id = book.book.id;
 
-  if ('imageLinks' in book.book) {
-    imageLink = book.book.imageLinks.thumbnail;
+  let navigate = useNavigate();
+
+  if ('imageLinks' in book.book.volumeInfo) {
+    imageLink = book.book.volumeInfo.imageLinks.thumbnail;
   }
-
-  //   console.log('title', title);
-  //   console.log('authors', authors);
-  //   console.log('categories', categories);
-
-  //   return;
 
   categories = Array.isArray(categories) ? categories[0] : '';
   authors = authors || [''];
 
+  const openBookInfoHandler = () => {
+    return navigate(`/books/${id}`);
+  };
+
   return (
-    <li className='book'>
+    <li className='book' onClick={openBookInfoHandler}>
       <img className='book__cover' alt='book cover' src={imageLink} />
       <p className='book__category'>
         <a href='#'>{categories}</a>

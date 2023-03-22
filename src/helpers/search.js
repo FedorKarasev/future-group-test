@@ -7,3 +7,9 @@ export async function getData({ searchString, category, sortBy, startIndex = 0, 
   const data = await response.json();
   return data;
 }
+
+export async function getBookById(id, apiKey) {
+  const response = await fetch(`https://www.googleapis.com/books/v1/volumes/${id}?key=${apiKey}`);
+  const data = await response.json();
+  return data;
+}

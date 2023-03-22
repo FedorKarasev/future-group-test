@@ -6,11 +6,25 @@ import reportWebVitals from './reportWebVitals';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { store } from './states/store';
 import { Provider } from 'react-redux';
+import ErrorPage from './pages/error-page/error-page';
+import { BookInfo } from './components/bookinfo/BookInfo';
+import { Main } from './components/Main';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: '/books/:id',
+        element: <BookInfo />,
+      },
+      {
+        path: '/',
+        element: <Main />,
+      },
+    ],
   },
 ]);
 

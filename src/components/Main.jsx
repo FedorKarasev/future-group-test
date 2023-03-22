@@ -36,11 +36,11 @@ export const Main = () => {
   return (
     <main className='main-section'>
       <div className='found-items-container'>
-        <p className='found-items-count'>Found {totalItems} results</p>
+        {totalItems ? <p className='found-items-count'>Found {totalItems} results</p> : ''}
       </div>
       <ul className='found-items-list'>
         {books.map((book) => {
-          return <BookItem key={book.id} book={book.volumeInfo} />;
+          return <BookItem key={book.etag} book={book} />;
         })}
       </ul>
       {totalItems ? <button onClick={loadMoreHandler}>Load More</button> : ''}

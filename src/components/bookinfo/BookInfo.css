@@ -1,0 +1,43 @@
+.book-info {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+}
+
+.book-info .cover-container {
+  flex: 1;
+  padding: 2rem;
+  background-color: #f3f2f1;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.book-info .cover-container img {
+  width: 80%;
+  display: block;
+  box-shadow: 0.5rem 0.5rem 1rem rgba(0, 0, 0, 0.25);
+}
+
+.book-info .info {
+  flex: 2;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.book-info .info .title {
+  font-weight: 700;
+}
+
+.book-info .info .author {
+  color: #949290;
+  text-decoration: underline;
+}
+
+.book-info .info .description {
+  border: 1px solid #f3f2f1;
+  padding: 1.5rem;
+}

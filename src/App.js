@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updateBooksList, updateTotalItems } from './states/booksSlice';
 import { setSearchString, updateCategory, updateSortBy } from './states/filtersSlice';
 import { getData } from './helpers/search';
-import { Main } from './components/Main';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 function App() {
   const apiKey = useSelector((state) => state.app.apiKey);
@@ -15,10 +15,13 @@ function App() {
   const category = useSelector((state) => state.filters.category);
   const sortBy = useSelector((state) => state.filters.sortBy);
 
+  let navigate = useNavigate();
+
   const searchInputRef = useRef();
 
   const submitSearchHandler = (e) => {
     e.preventDefault();
+    navigate('/');
 
     async function search() {
       const searchedBooks = await getData({
@@ -75,7 +78,8 @@ function App() {
           </form>
         </div>
       </header>
-      {totalItems ? <Main /> : ''}
+      {/* {totalItems ? <Main /> : ''} */}
+      <Outlet />
     </div>
   );
 }
