@@ -43,7 +43,13 @@ export const Main = () => {
           return <BookItem key={book.etag} book={book} />;
         })}
       </ul>
-      {totalItems ? <button onClick={loadMoreHandler}>Load More</button> : ''}
+      {totalItems ? (
+        <button className='loadMoreBtn' onClick={loadMoreHandler}>
+          Load More
+        </button>
+      ) : (
+        ''
+      )}
     </main>
   );
 };

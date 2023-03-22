@@ -5,6 +5,8 @@ import { updateBooksList, updateTotalItems } from './states/booksSlice';
 import { setSearchString, updateCategory, updateSortBy } from './states/filtersSlice';
 import { getData } from './helpers/search';
 import { Outlet, useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 function App() {
   const apiKey = useSelector((state) => state.app.apiKey);
@@ -53,7 +55,12 @@ function App() {
         <div className='wrapper'>
           <h2>Search for books</h2>
           <form onSubmit={(e) => submitSearchHandler(e)} className='search-form'>
-            <input ref={searchInputRef} type='text' placeholder='Найти книгу' />
+            <div className='searchInputContainer'>
+              <input className='search-input' ref={searchInputRef} type='text' placeholder='Найти книгу' />
+              <button onClick={(e) => submitSearchHandler(e)} className='searchBtn'>
+                <FontAwesomeIcon icon={faMagnifyingGlass} />
+              </button>
+            </div>
             <div className='filters-container'>
               <div className='filter'>
                 <label htmlFor='categories'>Categories</label>
@@ -78,7 +85,6 @@ function App() {
           </form>
         </div>
       </header>
-      {/* {totalItems ? <Main /> : ''} */}
       <Outlet />
     </div>
   );

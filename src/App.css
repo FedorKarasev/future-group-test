@@ -116,7 +116,38 @@
   max-width: 90%;
 }
 
-button {
+.searchInputContainer {
+  position: relative;
+}
+
+.search-form .search-input {
+  width: 100%;
+  padding-right: 3rem;
+}
+
+.searchBtn {
+  background-color: rgba(0, 0, 0, 0.25);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 2rem;
+  border: 0;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  background-color: #008f40;
+}
+
+.searchBtn:hover {
+  background-color: #00411d;
+}
+
+.search-icon {
+  color: black;
+}
+
+.loadMoreBtn {
   font-size: 1rem;
   padding: 1rem 1.5rem;
   border: none;
@@ -128,6 +159,6 @@ button {
   transition: all 0.2s ease-in-out;
 }
 
-button:hover {
+.loadMoreBtn:hover {
   background-color: #00411d;
 }
