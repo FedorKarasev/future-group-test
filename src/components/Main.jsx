@@ -11,7 +11,7 @@ export const Main = () => {
   const apiKey = useSelector((state) => state.app.apiKey);
   const category = useSelector((state) => state.filters.category);
   const sortBy = useSelector((state) => state.filters.sortBy);
-  const startIndex = useSelector((state) => state.filters.startIndex);
+  let startIndex = useSelector((state) => state.filters.startIndex);
   const searchString = useSelector((state) => state.filters.searchString);
 
   const dispatch = useDispatch();
@@ -43,7 +43,7 @@ export const Main = () => {
           return <BookItem key={book.id} book={book.volumeInfo} />;
         })}
       </ul>
-      <button onClick={loadMoreHandler}>Load More</button>
+      {totalItems ? <button onClick={loadMoreHandler}>Load More</button> : ''}
     </main>
   );
 };

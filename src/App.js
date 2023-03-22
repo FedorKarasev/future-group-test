@@ -1,8 +1,7 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import './App.css';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCurrentBooksList, updateBooksList, updateTotalItems } from './states/booksSlice';
-import { BookItem } from './components/BookItem';
+import { updateBooksList, updateTotalItems } from './states/booksSlice';
 import { setSearchString, updateCategory, updateSortBy } from './states/filtersSlice';
 import { getData } from './helpers/search';
 import { Main } from './components/Main';
@@ -10,6 +9,7 @@ import { Main } from './components/Main';
 function App() {
   const apiKey = useSelector((state) => state.app.apiKey);
   const startIndex = useSelector((state) => state.filters.startIndex);
+  const totalItems = useSelector((state) => state.books.totalItems);
 
   const dispatch = useDispatch();
   const category = useSelector((state) => state.filters.category);
@@ -75,7 +75,7 @@ function App() {
           </form>
         </div>
       </header>
-      <Main />
+      {totalItems ? <Main /> : ''}
     </div>
   );
 }
