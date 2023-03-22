@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { updateBooksList, updateTotalItems } from './states/booksSlice';
 import { setSearchString, updateCategory, updateSortBy } from './states/filtersSlice';
 import { getData } from './helpers/search';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
@@ -53,7 +53,9 @@ function App() {
     <div className='app'>
       <header className='app-header'>
         <div className='wrapper'>
-          <h2>Search for books</h2>
+          <Link to='/'>
+            <h2>Search for books</h2>
+          </Link>
           <form onSubmit={(e) => submitSearchHandler(e)} className='search-form'>
             <div className='searchInputContainer'>
               <input className='search-input' ref={searchInputRef} type='text' placeholder='Найти книгу' />
