@@ -3,19 +3,17 @@ import './App.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { addToCurrentBooksList, updateBooksList, updateTotalItems } from './states/booksSlice';
 import { BookItem } from './components/BookItem';
-import { updateCategory, updateSortBy } from './states/filtersSlice';
+import { setSearchString, updateCategory, updateSortBy } from './states/filtersSlice';
 import { getData } from './helpers/search';
+import { Main } from './components/Main';
 
 function App() {
-  const apiKey = 'AIzaSyDqJ8WW5OCHdKT6rGJtawuJraEY_A_Qhsc';
+  const apiKey = useSelector((state) => state.app.apiKey);
+  const startIndex = useSelector((state) => state.filters.startIndex);
 
   const dispatch = useDispatch();
-  const books = useSelector((state) => state.books.books);
-  const totalItems = useSelector((state) => state.books.totalItems);
   const category = useSelector((state) => state.filters.category);
   const sortBy = useSelector((state) => state.filters.sortBy);
-
-  let [startIndex, setStartIndex] = useState(0);
 
   const searchInputRef = useRef();
 
@@ -30,11 +28,9 @@ function App() {
         apiKey,
         startIndex,
       });
+      dispatch(setSearchString(searchInputRef.current.value));
       dispatch(updateBooksList(searchedBooks.items));
       dispatch(updateTotalItems(searchedBooks.totalItems));
-
-      console.log(searchedBooks);
-      return;
     }
 
     search();
@@ -46,23 +42,6 @@ function App() {
 
   const changeSortByHandler = (e) => {
     dispatch(updateSortBy(e.target.value));
-  };
-
-  const loadMoreHandler = () => {
-    async function loadMore() {
-      const loadedBooks = await getData({
-        searchString: searchInputRef.current.value,
-        category,
-        sortBy,
-        apiKey,
-        startIndex,
-      });
-
-      dispatch(addToCurrentBooksList(loadedBooks.items));
-      setStartIndex((startIndex += 30));
-    }
-
-    loadMore();
   };
 
   return (
@@ -96,18 +75,7 @@ function App() {
           </form>
         </div>
       </header>
-
-      <main className='main-section'>
-        <div className='found-items-container'>
-          <p className='found-items-count'>Found {totalItems} results</p>
-        </div>
-        <ul className='found-items-list'>
-          {books.map((book) => {
-            return <BookItem key={book.id} book={book.volumeInfo} />;
-          })}
-        </ul>
-        <button onClick={loadMoreHandler}>Load More</button>
-      </main>
+      <Main />
     </div>
   );
 }

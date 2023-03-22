@@ -3,6 +3,9 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   category: 'all',
   sortBy: 'relevance',
+  startIndex: 0,
+  maxResults: 30,
+  searchString: '',
 };
 
 export const filtersSlice = createSlice({
@@ -15,9 +18,15 @@ export const filtersSlice = createSlice({
     updateSortBy: (state, action) => {
       state.sortBy = action.payload;
     },
+    setStartIndex: (state, action) => {
+      state.startIndex = action.payload;
+    },
+    setSearchString: (state, action) => {
+      state.searchString = action.payload;
+    },
   },
 });
 
-export const { updateCategory, updateSortBy } = filtersSlice.actions;
+export const { updateCategory, updateSortBy, setStartIndex, setSearchString } = filtersSlice.actions;
 
 export default filtersSlice.reducer;
