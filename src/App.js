@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import './App.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateBooksList, updateTotalItems } from './states/booksSlice';
@@ -7,15 +7,16 @@ import { getData } from './helpers/search';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import Spinner from 'react-bootstrap/Spinner';
 
 function App() {
   const apiKey = useSelector((state) => state.app.apiKey);
   const startIndex = useSelector((state) => state.filters.startIndex);
-  const totalItems = useSelector((state) => state.books.totalItems);
 
   const dispatch = useDispatch();
   const category = useSelector((state) => state.filters.category);
   const sortBy = useSelector((state) => state.filters.sortBy);
+  let [isLoading, setIsLoading] = useState(false);
 
   let navigate = useNavigate();
 
@@ -36,8 +37,12 @@ function App() {
       dispatch(setSearchString(searchInputRef.current.value));
       dispatch(updateBooksList(searchedBooks.items));
       dispatch(updateTotalItems(searchedBooks.totalItems));
+
+      searchInputRef.current.value = '';
+      setIsLoading(false);
     }
 
+    setIsLoading(true);
     search();
   };
 
@@ -87,7 +92,7 @@ function App() {
           </form>
         </div>
       </header>
-      <Outlet />
+      {isLoading ? <Spinner className='spinner' animation='border' variant='success' /> : <Outlet />}
     </div>
   );
 }

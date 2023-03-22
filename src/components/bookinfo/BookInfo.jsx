@@ -3,6 +3,7 @@ import './BookInfo.css';
 import { useSelector } from 'react-redux';
 import NoCover from '../../assets/images/no-cover.jpg';
 import { getBookById } from '../../helpers/search';
+import Spinner from 'react-bootstrap/Spinner';
 
 export const BookInfo = () => {
   const apiKey = useSelector((state) => state.app.apiKey);
@@ -22,9 +23,9 @@ export const BookInfo = () => {
     };
 
     loadBook();
-  }, []);
+  }, [apiKey, bookId]);
 
-  if (book === undefined) return <p>Loading...</p>;
+  if (book === undefined) return <Spinner className='spinner' animation='border' variant='success' />;
 
   if (book) {
     if ('imageLinks' in book.volumeInfo) {
