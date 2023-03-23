@@ -46,7 +46,13 @@ export const BookInfo = () => {
       <div className='info'>
         <p className='category'>{categories}</p>
         <h2 className='title'>{title}</h2>
-
+        {authors.map((author) => {
+          return (
+            <p key={author} className='author'>
+              {author}
+            </p>
+          );
+        })}
         <div className='description'>{description}</div>
       </div>
     </div>
