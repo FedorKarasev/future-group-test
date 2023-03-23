@@ -3,6 +3,7 @@ import NoCover from '../assets/images/no-cover.jpg';
 import { useNavigate } from 'react-router-dom';
 
 export const BookItem = (book) => {
+  console.log(book);
   let { title, authors, categories } = book.book.volumeInfo;
   let imageLink = NoCover;
   const id = book.book.id;
@@ -10,7 +11,7 @@ export const BookItem = (book) => {
   let navigate = useNavigate();
 
   if ('imageLinks' in book.book.volumeInfo) {
-    imageLink = book.book.volumeInfo.imageLinks.thumbnail;
+    imageLink = book.book.volumeInfo.imageLinks.smallThumbnail;
   }
 
   categories = Array.isArray(categories) ? categories[0] : '';

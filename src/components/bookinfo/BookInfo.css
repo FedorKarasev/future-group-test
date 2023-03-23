@@ -41,3 +41,9 @@
   border: 1px solid #f3f2f1;
   padding: 1.5rem;
 }
+
+@media only screen and (max-width: 320px) {
+  .book-info {
+    flex-direction: column;
+  }
+}
