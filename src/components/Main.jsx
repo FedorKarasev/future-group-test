@@ -38,6 +38,8 @@ export const Main = () => {
     loadMore();
   };
 
+  if (books === undefined) return <p>Ничего не найдено</p>;
+
   return (
     <main className='main-section'>
       <div className='found-items-container'>

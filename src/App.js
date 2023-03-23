@@ -27,19 +27,24 @@ function App() {
     navigate('/');
 
     async function search() {
-      const searchedBooks = await getData({
-        searchString: searchInputRef.current.value,
-        category,
-        sortBy,
-        apiKey,
-        startIndex,
-      });
-      dispatch(setSearchString(searchInputRef.current.value));
-      dispatch(updateBooksList(searchedBooks.items));
-      dispatch(updateTotalItems(searchedBooks.totalItems));
+      try {
+        const searchedBooks = await getData({
+          searchString: searchInputRef.current.value,
+          category,
+          sortBy,
+          apiKey,
+          startIndex,
+        });
 
-      searchInputRef.current.value = '';
-      setIsLoading(false);
+        dispatch(setSearchString(searchInputRef.current.value));
+        dispatch(updateBooksList(searchedBooks.items));
+        dispatch(updateTotalItems(searchedBooks.totalItems));
+
+        searchInputRef.current.value = '';
+        setIsLoading(false);
+      } catch (e) {
+        console.log('error', e);
+      }
     }
 
     setIsLoading(true);
